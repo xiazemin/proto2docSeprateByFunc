@@ -3,6 +3,7 @@ package gen
 import (
 	"fmt"
 
+	gendoc "github.com/pseudomuto/protoc-gen-doc"
 	"github.com/xiazemin/proto2docSeprateByFunc/model"
 	parse "github.com/xiazemin/proto2docSeprateByFunc/parse"
 )
@@ -41,9 +42,28 @@ func GenFiles(dst string, files ...string) {
 				Number: "1"}}}, {Name: "resp1",
 			Fields: []*model.Field{{Type: "int64",
 				Name:   "field2",
-				Number: "1"}}}},
+				Number: "1"}}},
+			{Name: "req2",
+				Fields: []*model.Field{{Type: "string",
+					Name:   "field1",
+					Number: "1"}}}, {Name: "resp2",
+				Fields: []*model.Field{{Type: "int64",
+					Name:   "field2",
+					Number: "1"}}}},
 	}
 	r := NewProtoRender()
 	b, e := r.Apply(t)
 	fmt.Println(string(b), e)
+
+	// if err := protokit.RunPlugin(new(gendoc.Plugin)); err != nil {
+	// 	log.Fatal(err)
+	// }
+
+	p := new(gendoc.Plugin)
+	req := &protokit.CodeGeneratorRequest{}
+	resp, err := p.Generate(req)
+	if err != nil {
+		fmt.Println(err)
+	}
+	fmt.Println(resp)
 }
