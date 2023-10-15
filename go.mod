@@ -2,7 +2,10 @@ module github.com/xiazemin/proto2docSeprateByFunc
 
 go 1.19
 
-require github.com/emicklei/proto v1.12.1
+require (
+	github.com/emicklei/proto v1.12.1
+	github.com/pseudomuto/protoc-gen-doc v1.5.1
+)
 
 require (
 	github.com/Masterminds/semver v1.4.2 // indirect
@@ -12,8 +15,7 @@ require (
 	github.com/google/uuid v1.1.2 // indirect
 	github.com/huandu/xstrings v1.0.0 // indirect
 	github.com/imdario/mergo v0.3.4 // indirect
-	github.com/pseudomuto/protoc-gen-doc v1.5.1 // indirect
 	github.com/pseudomuto/protokit v0.2.1 // indirect
-	golang.org/x/crypto v0.0.0-20200622213623-75b288015ac9 // indirect
+	golang.org/x/crypto v0.1.0 // indirect
 	google.golang.org/protobuf v1.27.1 // indirect
 )
