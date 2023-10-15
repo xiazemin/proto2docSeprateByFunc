@@ -1,0 +1,16 @@
+syntax = "proto3";
+{{.Options}};
+{{range .Services}}
+service {{.Name}}{
+   {{range .Rpcs}}
+    rpc {{.Name}}({{.Request}}) returns ({{.Response}});
+   {{end}}
+}
+{{end}}
+{{range .Messages}}
+message {{.Name}}{
+    {{range .Fields}}
+      {{.Type}} {{.Name}} == {{.Number}};
+    {{end}}
+}
+{{end}}
