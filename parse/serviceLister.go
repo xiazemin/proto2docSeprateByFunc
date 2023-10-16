@@ -1,7 +1,10 @@
 package parse
 
 import (
+	"encoding/json"
 	"fmt"
+	"io/ioutil"
+	"strings"
 
 	"github.com/emicklei/proto"
 	"github.com/xiazemin/proto2docSeprateByFunc/model"
@@ -36,6 +39,26 @@ func (l *serviceLister) VisitRPC(r *proto.RPC) {
 	l.currentService.Rpcs = append(l.currentService.Rpcs, rpc)
 	if r.Comment != nil {
 		rpc.Comment = r.Comment.Message()
+	}
+	for _, ele := range r.Elements {
+		v, _ := json.Marshal(ele)
+		fmt.Println("foptele:", string(v))
+	}
+	for _, opt := range r.Options {
+		v, _ := json.Marshal(opt)
+		fmt.Println("fopt:", string(v))
+		data, _ := ioutil.ReadFile(l.fileName)
+		lines := strings.Split(string(data), "\n")
+
+		optVal := strings.Join(lines[opt.Position.Line:opt.Position.Line+2], "\n")
+
+		fmt.Println("optVal:", optVal)
+		rpc.Options = append(rpc.Options, &model.Option{
+			Name:  opt.Name,
+			Value: optVal, //opt.Constant.Source,
+		})
+
+		//opt.Position.Line+1~opt.Position.Line+3
 	}
 	// fmt.Println(l, r)
 	//fmt.Println(r.Name, r.RequestType, r.ReturnsType)

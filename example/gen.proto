@@ -1,4 +1,5 @@
 syntax = "proto3";
+
 package hello;
 
 option go_package = "hello/go";
@@ -8,10 +9,14 @@ option go_package = "hello/go";
 service hello1{
    
     
-    rpc Hi(req1) returns (resp1);
+    rpc Hi(req1) returns (resp1){
+        
+    }
    
     
-    rpc Hi2(req2) returns (resp2);
+    rpc Hi2(req2) returns (resp2){
+        
+    }
    
 }
 
@@ -19,10 +24,14 @@ service hello1{
 service hello2{
    
     
-    rpc Hi(req1) returns (resp1);
+    rpc Hi(req1) returns (resp1){
+        
+    }
    
     
-    rpc Hi2(req2) returns (resp2);
+    rpc Hi2(req2) returns (resp2){
+        
+    }
    
 }
 

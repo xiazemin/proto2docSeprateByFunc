@@ -1,14 +1,23 @@
 syntax = "proto3";
+
+import "github.com/gogo/protobuf/gogoproto/gogo.proto";
+
+import "./sub.proto";
+
 package myService.pkg;
 
 option go_package = "./main";
+
+option (gogoproto.goproto_getters_all) = false;
 
 
 
 service yourService{
    
     
-    rpc Hello(Request) returns (Response);
+    rpc Hello(Request) returns (Response){
+        
+    }
    
 }
 
@@ -72,6 +81,9 @@ message Response{
     
       
       string field4 = 2;
+    
+      
+      myService.sub.pkg.Response field5 = 3;
     
    
 }

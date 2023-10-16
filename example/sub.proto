@@ -1,5 +1,5 @@
 syntax = "proto3";
-package myService.pkg;
+package myService.sub.pkg;
 option go_package = "./main";
 service myService{
     rpc Hello2(Request2)returns (Response2){}

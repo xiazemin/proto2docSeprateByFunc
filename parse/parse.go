@@ -11,12 +11,14 @@ import (
 type SandBox struct {
 	*model.Template
 	meaasgeTable map[string]*proto.Message
+	fileName     string
 }
 
-func NewSandBox() *SandBox {
+func NewSandBox(fileName string) *SandBox {
 	return &SandBox{
 		Template:     &model.Template{},
 		meaasgeTable: make(map[string]*proto.Message),
+		fileName:     fileName,
 	}
 }
 
@@ -34,6 +36,7 @@ func (s *SandBox) ProtoSplit(src string) *model.Template {
 	proto.Walk(definition,
 		proto.WithPackage(s.handlePackage),
 		proto.WithOption(s.handleOption),
+		proto.WithImport(s.handleImport),
 	)
 
 	// proto.Walk(definition,
@@ -59,19 +62,36 @@ func (s *SandBox) handlePackage(p *proto.Package) {
 	//s.Accept(root)
 }
 
+func (s *SandBox) handleImport(imp *proto.Import) {
+	if imp == nil {
+		return
+	}
+	s.Imports = append(s.Imports, imp.Filename)
+}
+
 func (s *SandBox) handleOption(opt *proto.Option) {
 	if opt == nil {
 		return
 	}
+	// if !opt.IsEmbedded {
+	// 	return
+	// }
 	// for _, e := range opt.Elements {
 	// 	e.Accept(l)
 	// 	//fmt.Println(i)
 	// }
 	//fmt.Println(opt, opt.Name, opt.Constant.SourceRepresentation())
+	if opt.Constant.SourceRepresentation() == "" {
+		//={
+		//}
+		return
+	}
+	fmt.Println("opt:", *opt)
 	s.Options = append(s.Options, &model.Option{
 		Name:  opt.Name,
 		Value: opt.Constant.SourceRepresentation(),
 	})
+
 }
 
 func (s *SandBox) handleService(srv *proto.Service) {

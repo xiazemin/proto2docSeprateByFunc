@@ -1,4 +1,7 @@
 syntax = "proto3";
+{{range .Imports}}
+import "{{.}}";
+{{end}}
 package {{.Package}};
 {{range .Options}}
 option {{.Name}} = {{.Value}};
@@ -12,7 +15,12 @@ service {{.Name}}{
     {{if ne .Comment ""}}
     //{{.Comment}}
     {{end}}
-    rpc {{.Name}}({{.Request}}) returns ({{.Response}});
+    rpc {{.Name}}({{.Request}}) returns ({{.Response}}){
+        {{range .Options}}
+          option {{.Name}} = { 
+           {{.Value}}
+        {{end}}
+    }
    {{end}}
 }
 {{end}}

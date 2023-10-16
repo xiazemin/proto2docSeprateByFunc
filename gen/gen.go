@@ -19,7 +19,7 @@ func GenFiles(dst string, debug bool, files ...string) {
 	}
 
 	for i := 0; i < len(files); i++ {
-		sandbox := parse.NewSandBox()
+		sandbox := parse.NewSandBox(files[i])
 		template := sandbox.ProtoSplit(files[i])
 		// for name, m := range msgs {
 		// 	fmt.Println(dst+name+".proto", m)
@@ -39,10 +39,10 @@ func GenFiles(dst string, debug bool, files ...string) {
 		}
 
 		for _, srv := range template.Services {
-
 			for _, rpc := range srv.Rpcs {
 				splitTemplate := &model.Template{
 					Package: template.Package,
+					Imports: template.Imports,
 					Options: template.Options,
 					Services: []*model.Service{{
 						Name:    srv.Name,
@@ -52,6 +52,7 @@ func GenFiles(dst string, debug bool, files ...string) {
 							Comment:  rpc.Comment,
 							Request:  rpc.Request,
 							Response: rpc.Response,
+							Options:  rpc.Options,
 						}},
 					}},
 					Messages: append(findRelativeMessages(messages, rpc.Request), findRelativeMessages(messages, rpc.Response)...),

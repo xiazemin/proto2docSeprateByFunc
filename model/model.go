@@ -2,6 +2,7 @@ package model
 
 type Template struct {
 	Package  string
+	Imports  []string
 	Options  []*Option
 	Services []*Service
 	Messages []*Message
@@ -28,6 +29,7 @@ type Rpc struct {
 	Comment  string
 	Request  string
 	Response string
+	Options  []*Option
 }
 
 type Message struct {
