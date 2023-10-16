@@ -17,9 +17,9 @@ service myService{
     
     rpc Hello1(Request) returns (Response){
         
-    }
+    };
    
-}
+};
 
 
 
@@ -28,28 +28,38 @@ message Request{
       
       //这是第一个字段的注释 枚举值有 1，2，3，4
       
-      string field1 = 1;
+       
+           string field1 = 1; 
+        
     
       
       //这是第二个字段的注释
       
-      string field2 = 2;
+       
+           string field2 = 2; 
+        
     
       
       // 这是嵌套字段
       
-      SubMessage filed = 5;
+       
+           SubMessage filed = 5;
+        
     
    
      oneof kind {
       
         
-        string name = 3;
+        
+          string name = 3 ;
+        
       
         
         //这是oneof第二个字段的注释
         
-        int32 code = 4;
+        
+          int32 code = 4 ;
+        
       
       }
     
@@ -61,12 +71,16 @@ message SubMessage{
       
       //sub 这是第一个字段的注释 枚举值有 1，2，3，4
       
-      string field1 = 1;
+       
+             string field1 = 1; 
+        
     
       
       //sub 这是第二个字段的注释
       
-      string field2 = 2;
+       
+             string field2 = 2; 
+        
     
    
 }
@@ -77,13 +91,19 @@ message Response{
       
       //这是返回值字段的注释
       
-      string field3 = 1;
+       
+           string field3 = 1;
+        
     
       
-      string field4 = 2;
+       
+           string field4 = 2 [(gogoproto.moretags) = 'form:"account_id" validate:"required"'];
+        
     
       
-      myService.sub.pkg.Response field5 = 3;
+       
+           myService.sub.pkg.Response field5 = 3;
+        
     
    
 }

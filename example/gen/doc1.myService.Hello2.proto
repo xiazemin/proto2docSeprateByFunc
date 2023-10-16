@@ -17,28 +17,36 @@ service myService{
     
     rpc Hello2(Request2) returns (Response2){
         
-    }
+    };
    
-}
+};
 
 
 
 message Request2{
     
       
-      string field1 = 1;
+       
+           string field1 = 1;
+        
     
       
-      string field2 = 2;
+       
+           string field2 = 2;
+        
     
    
      oneof kind {
       
         
-        string name = 3;
+        
+          string name = 3 ;
+        
       
         
-        int32 code = 4;
+        
+          int32 code = 4 ;
+        
       
       }
     
@@ -48,15 +56,21 @@ message Request2{
 message Response2{
     
       
-      string field3 = 1;
+       
+           string field3 = 1;
+        
     
       
-      string field4 = 2;
+       
+           string field4 = 2;
+        
     
       
       //这是嵌套字段的注释
       
-      Response Response = 3;
+       
+           Response Response = 3;
+        
     
    
 }
@@ -67,13 +81,19 @@ message Response{
       
       //这是返回值字段的注释
       
-      string field3 = 1;
+       
+           string field3 = 1;
+        
     
       
-      string field4 = 2;
+       
+           string field4 = 2 [(gogoproto.moretags) = 'form:"account_id" validate:"required"'];
+        
     
       
-      myService.sub.pkg.Response field5 = 3;
+       
+           myService.sub.pkg.Response field5 = 3;
+        
     
    
 }

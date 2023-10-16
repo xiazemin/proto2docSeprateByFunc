@@ -20,9 +20,9 @@ service {{.Name}}{
           option {{.Name}} = { 
            {{.Value}}
         {{end}}
-    }
+    };
    {{end}}
-}
+};
 {{end}}
 {{range .Messages}}
 {{if ne .Comment ""}}
@@ -33,7 +33,11 @@ message {{.Name}}{
       {{if ne .Comment ""}}
       //{{.Comment}}
       {{end}}
-      {{.Type}} {{.Name}} = {{.Number}};
+       {{if ne .Options ""}}
+         {{.Options}}
+        {{else}}
+          {{.Type}} {{.Name}} = {{.Number}} ;
+        {{end}}
     {{end}}
    {{if .Oneof}}
      oneof {{.Oneof.Name}} {
@@ -41,7 +45,11 @@ message {{.Name}}{
         {{if ne .Comment ""}}
         //{{.Comment}}
         {{end}}
-        {{.Type}} {{.Name}} = {{.Number}};
+        {{if ne .Options ""}}
+         {{.Options}}
+        {{else}}
+          {{.Type}} {{.Name}} = {{.Number}} ;
+        {{end}}
       {{end}}
       }
     {{end}}

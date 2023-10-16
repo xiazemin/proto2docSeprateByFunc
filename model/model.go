@@ -44,4 +44,5 @@ type Field struct {
 	Name    string
 	Number  string
 	Comment string
+	Options string
 }

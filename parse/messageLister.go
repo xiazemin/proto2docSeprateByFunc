@@ -2,6 +2,7 @@ package parse
 
 import (
 	"fmt"
+	"io/ioutil"
 	"strconv"
 	"strings"
 
@@ -63,6 +64,12 @@ func (l *messageLister) VisitNormalField(i *proto.NormalField) {
 	if i.Comment != nil {
 		field.Comment = i.Comment.Message()
 	}
+
+	data, _ := ioutil.ReadFile(l.fileName)
+	lines := strings.Split(string(data), "\n")
+	line := lines[i.Position.Line-1]
+	fmt.Println("libe:", line)
+	field.Options = line
 	// fmt.Println("=====>", i.Sequence, i, l.currentMessage.Fields,
 	// 	i.Type,
 	// 	i.Name,

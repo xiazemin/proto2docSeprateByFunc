@@ -12,10 +12,10 @@ service myService{
     option (google.api.http) = {
       get:"/hi/Status"
     };
-  }
+  };
   rpc Hello1(Request)returns (Response){}
   rpc Hello2(Request2)returns (Response2){}
-}
+};
 
 service yourService{
   rpc Hello(Request)returns (Response){}
@@ -48,7 +48,7 @@ message SubMessage {
 message Response{
   //这是返回值字段的注释
   string field3 = 1;
-  string field4 = 2;
+  string field4 = 2 [(gogoproto.moretags) = 'form:"account_id" validate:"required"'];
   myService.sub.pkg.Response field5 = 3;
 }
 
