@@ -1,16 +1,41 @@
 syntax = "proto3";
-{{.Options}};
+package {{.Package}};
+{{range .Options}}
+option {{.Name}} = {{.Value}};
+{{end}}
 {{range .Services}}
+{{if ne .Comment ""}}
+//{{.Comment}}
+{{end}}
 service {{.Name}}{
    {{range .Rpcs}}
+    {{if ne .Comment ""}}
+    //{{.Comment}}
+    {{end}}
     rpc {{.Name}}({{.Request}}) returns ({{.Response}});
    {{end}}
 }
 {{end}}
 {{range .Messages}}
+{{if ne .Comment ""}}
+//{{.Comment}}
+{{end}}
 message {{.Name}}{
     {{range .Fields}}
-      {{.Type}} {{.Name}} == {{.Number}};
+      {{if ne .Comment ""}}
+      //{{.Comment}}
+      {{end}}
+      {{.Type}} {{.Name}} = {{.Number}};
+    {{end}}
+   {{if .Oneof}}
+     oneof {{.Oneof.Name}} {
+      {{range .Oneof.Fields}}
+        {{if ne .Comment ""}}
+        //{{.Comment}}
+        {{end}}
+        {{.Type}} {{.Name}} = {{.Number}};
+      {{end}}
+      }
     {{end}}
 }
 {{end}}

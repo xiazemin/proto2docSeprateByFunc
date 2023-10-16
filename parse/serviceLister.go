@@ -1,26 +1,43 @@
 package parse
 
 import (
+	"fmt"
+
 	"github.com/emicklei/proto"
+	"github.com/xiazemin/proto2docSeprateByFunc/model"
 )
 
 type serviceLister struct {
 	proto.NoopVisitor
 	*SandBox
+	currentService *model.Service
 }
 
-func (l serviceLister) VisitService(v *proto.Service) {
+func (l *serviceLister) VisitService(v *proto.Service) {
 	//fmt.Println(v.Name)
-	// for i, e := range v.Elements {
-	// 	e.Accept(root)
-	// 	fmt.Println(i)
-	// }
-	// v.Accept(root)
+	l.currentService.Name = v.Name
+	l.Services = append(l.Services, l.currentService)
+	// fmt.Println("VisitService:", l, v)
+	for i, e := range v.Elements {
+		e.Accept(l)
+		fmt.Println(i)
+	}
+	v.Accept(l)
 }
-func (l serviceLister) VisitNormalField(i *proto.NormalField) {
+func (l *serviceLister) VisitNormalField(i *proto.NormalField) {
 	//fmt.Println(i.Name)
 }
-func (l serviceLister) VisitRPC(r *proto.RPC) {
+func (l *serviceLister) VisitRPC(r *proto.RPC) {
+	rpc := &model.Rpc{
+		Name:     r.Name,
+		Request:  r.RequestType,
+		Response: r.ReturnsType,
+	}
+	l.currentService.Rpcs = append(l.currentService.Rpcs, rpc)
+	if r.Comment != nil {
+		rpc.Comment = r.Comment.Message()
+	}
+	// fmt.Println(l, r)
 	//fmt.Println(r.Name, r.RequestType, r.ReturnsType)
 	// l.num++
 	// l.sheet = append(l.sheet, &xmlXmind.XmindNode{

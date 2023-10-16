@@ -5,5 +5,5 @@ import (
 )
 
 func main() {
-	gen.GenFiles("./doc/", "./example/sub.proto", "./example/request.proto")
+	gen.GenFiles("./example/gen/doc", true, "./example/sub.proto", "./example/request.proto")
 }

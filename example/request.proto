@@ -1,6 +1,22 @@
 syntax = "proto3";
 package myService.pkg;
 option go_package = "./main";
+
+
+
+service myService{
+  rpc Hello(Request)returns (Response){}
+  rpc Hello1(Request)returns (Response){}
+  rpc Hello2(Request2)returns (Response2){}
+}
+
+service yourService{
+  rpc Hello(Request)returns (Response){}
+  rpc Hello1(Request)returns (Response){}
+  rpc Hello2(Request2)returns (Response2){}
+}
+
+
 message Request {
   //这是第一个字段的注释 枚举值有 1，2，3，4
   string field1 = 1; 
@@ -11,16 +27,16 @@ message Request {
     //这是oneof第二个字段的注释
     int32  code = 4;
   }
+  // 这是嵌套字段
+  SubMessage filed = 5;
 }
 
-
-service myService{
-  rpc Hello(Request)returns (Response){}
-  rpc Hello1(Request)returns (Response){}
-  rpc Hello2(Request2)returns (Response2){}
+message SubMessage {
+    //sub 这是第一个字段的注释 枚举值有 1，2，3，4
+    string field1 = 1; 
+    //sub 这是第二个字段的注释
+    string field2 = 2; 
 }
-
-
 
 message Response{
   //这是返回值字段的注释
@@ -36,12 +52,6 @@ message Request2 {
     int32  code = 4;
   }
 }
-service yourService{
-  rpc Hello(Request)returns (Response){}
-  rpc Hello1(Request)returns (Response){}
-  rpc Hello2(Request2)returns (Response2){}
-}
-
 
 message Response2{
   string field3 = 1;
