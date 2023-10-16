@@ -8,7 +8,7 @@ option go_package = "./main";
 
 service myService{
    
-    
+     
     rpc Hello2(Request2) returns (Response2){
         
     };
@@ -19,12 +19,12 @@ service myService{
 
 message Response{
     
-      
+    
        
              string field3 = 1;
         
     
-      
+    
        
              string field4 = 2;
         
@@ -35,7 +35,7 @@ message Response{
 
 message Request2{
     
-      
+    
        
              string field1 = 1;
         
@@ -46,12 +46,12 @@ message Request2{
 
 message Response2{
     
-      
+    
        
              string field3 = 1;
         
     
-      
+    
        
              Response Response = 2;
         

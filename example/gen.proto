@@ -8,12 +8,12 @@ option go_package = "hello/go";
 
 service hello1{
    
-    
+     
     rpc Hi(req1) returns (resp1){
         
     };
    
-    
+     
     rpc Hi2(req2) returns (resp2){
         
     };
@@ -23,12 +23,12 @@ service hello1{
 
 service hello2{
    
-    
+     
     rpc Hi(req1) returns (resp1){
         
     };
    
-    
+     
     rpc Hi2(req2) returns (resp2){
         
     };
@@ -39,7 +39,7 @@ service hello2{
 
 message req1{
     
-      
+    
        
           string field1 = 1 ;
         
@@ -50,7 +50,7 @@ message req1{
 
 message resp1{
     
-      
+    
        
           int64 field2 = 1 ;
         
@@ -61,7 +61,7 @@ message resp1{
 
 message req2{
     
-      
+    
        
           string field1 = 1 ;
         
@@ -72,7 +72,7 @@ message req2{
 
 message resp2{
     
-      
+    
        
           int64 field2 = 1 ;
         

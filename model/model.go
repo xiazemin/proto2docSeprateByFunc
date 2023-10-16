@@ -15,7 +15,7 @@ type Option struct {
 
 type Service struct {
 	Name    string
-	Comment string
+	Comment []string
 	Rpcs    []*Rpc
 }
 
@@ -26,7 +26,7 @@ type Oneof struct {
 
 type Rpc struct {
 	Name     string
-	Comment  string
+	Comment  []string
 	Request  string
 	Response string
 	Options  []*Option
@@ -34,7 +34,7 @@ type Rpc struct {
 
 type Message struct {
 	Name    string
-	Comment string
+	Comment []string
 	Fields  []*Field
 	Oneof   *Oneof
 }
@@ -43,6 +43,6 @@ type Field struct {
 	Type    string
 	Name    string
 	Number  string
-	Comment string
+	Comment []string
 	Options string
 }

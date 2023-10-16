@@ -38,7 +38,7 @@ func (l *serviceLister) VisitRPC(r *proto.RPC) {
 	}
 	l.currentService.Rpcs = append(l.currentService.Rpcs, rpc)
 	if r.Comment != nil {
-		rpc.Comment = r.Comment.Message()
+		rpc.Comment = r.Comment.Lines //strings.Join(r.Comment.Lines, "\n") // r.Comment.Message()
 	}
 	for _, ele := range r.Elements {
 		v, _ := json.Marshal(ele)

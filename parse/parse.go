@@ -101,7 +101,7 @@ func (s *SandBox) handleService(srv *proto.Service) {
 		currentService: &model.Service{Name: srv.Name},
 	}
 	if srv.Comment != nil {
-		root.currentService.Comment = srv.Comment.Message()
+		root.currentService.Comment = srv.Comment.Lines // strings.Join(srv.Comment.Lines, "\n") //srv.Comment.Message()
 	}
 	s.Services = append(s.Services, root.currentService)
 	//s.Accept(root)
@@ -132,7 +132,7 @@ func (s *SandBox) handleMessage(m *proto.Message) {
 			},
 		}
 		if message.Comment != nil {
-			lister.currentMessage.Comment = message.Comment.Message()
+			lister.currentMessage.Comment = message.Comment.Lines // strings.Join(message.Comment.Lines, "\n") // message.Comment.Message()
 		}
 		s.Messages = append(s.Messages, lister.currentMessage)
 		for _, each := range m.Elements {

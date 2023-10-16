@@ -47,7 +47,13 @@ message SubMessage {
 
 message Response{
   //这是返回值字段的注释
+  // 第二行注释
   string field3 = 1;
+  /*
+  1，
+  2，
+  多行注释
+  */
   string field4 = 2 [(gogoproto.moretags) = 'form:"account_id" validate:"required"'];
   myService.sub.pkg.Response field5 = 3;
 }

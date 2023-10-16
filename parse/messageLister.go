@@ -44,10 +44,10 @@ func (l *messageLister) VisitNormalField(i *proto.NormalField) {
 		fieldType = "[]" + fieldType
 	}
 
-	comment := " "
-	if i != nil && i.Comment != nil {
-		comment = comment + strings.Join(i.Comment.Lines, " ")
-	}
+	// comment := []string{}
+	// if i != nil && i.Comment != nil {
+	// 	comment = i.Comment.Lines // comment + strings.Join(i.Comment.Lines, " ")
+	// }
 
 	// if msgType := l.meaasgeTable[i.Type]; msgType != nil {
 	// 	//msgType.Accept(l)
@@ -62,7 +62,7 @@ func (l *messageLister) VisitNormalField(i *proto.NormalField) {
 	}
 	l.currentMessage.Fields = append(l.currentMessage.Fields, field)
 	if i.Comment != nil {
-		field.Comment = i.Comment.Message()
+		field.Comment = i.Comment.Lines // strings.Join(i.Comment.Lines, "\n")
 	}
 
 	data, _ := ioutil.ReadFile(l.fileName)
@@ -118,7 +118,7 @@ func (l *messageLister) VisitOneofField(o *proto.OneOfField) {
 	}
 	l.currentMessage.Oneof.Fields = append(l.currentMessage.Oneof.Fields, field)
 	if o.Field.Comment != nil {
-		field.Comment = o.Field.Comment.Message()
+		field.Comment = o.Field.Comment.Lines // strings.Join(o.Field.Comment.Lines, "\n") //Comment.Message()
 	}
 }
 

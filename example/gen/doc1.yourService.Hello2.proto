@@ -14,7 +14,7 @@ option (gogoproto.goproto_getters_all) = false;
 
 service yourService{
    
-    
+     
     rpc Hello2(Request2) returns (Response2){
         
     };
@@ -25,12 +25,12 @@ service yourService{
 
 message Request2{
     
-      
+    
        
            string field1 = 1;
         
     
-      
+    
        
            string field2 = 2;
         
@@ -55,19 +55,19 @@ message Request2{
 
 message Response2{
     
-      
+    
        
            string field3 = 1;
         
     
-      
+    
        
            string field4 = 2;
         
     
-      
-      //这是嵌套字段的注释
-      
+    
+    //这是嵌套字段的注释
+    
        
            Response Response = 3;
         
@@ -78,19 +78,31 @@ message Response2{
 
 message Response{
     
-      
-      //这是返回值字段的注释
-      
+    
+    //这是返回值字段的注释
+    
+    // 第二行注释
+    
        
            string field3 = 1;
         
     
-      
+    
+    //
+    
+    //  1，
+    
+    //  2，
+    
+    //  多行注释
+    
+    //  
+    
        
            string field4 = 2 [(gogoproto.moretags) = 'form:"account_id" validate:"required"'];
         
     
-      
+    
        
            myService.sub.pkg.Response field5 = 3;
         

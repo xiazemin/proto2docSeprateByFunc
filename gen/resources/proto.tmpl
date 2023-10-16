@@ -7,14 +7,14 @@ package {{.Package}};
 option {{.Name}} = {{.Value}};
 {{end}}
 {{range .Services}}
-{{if ne .Comment ""}}
-//{{.Comment}}
+{{range .Comment}}
+//{{.}}
 {{end}}
 service {{.Name}}{
    {{range .Rpcs}}
-    {{if ne .Comment ""}}
-    //{{.Comment}}
-    {{end}}
+    {{range .Comment}}
+    //{{.}}
+    {{end}} 
     rpc {{.Name}}({{.Request}}) returns ({{.Response}}){
         {{range .Options}}
           option {{.Name}} = { 
@@ -25,14 +25,14 @@ service {{.Name}}{
 };
 {{end}}
 {{range .Messages}}
-{{if ne .Comment ""}}
-//{{.Comment}}
+{{range .Comment}}
+//{{.}}
 {{end}}
 message {{.Name}}{
     {{range .Fields}}
-      {{if ne .Comment ""}}
-      //{{.Comment}}
-      {{end}}
+    {{range .Comment}}
+    //{{.}}
+    {{end}}
        {{if ne .Options ""}}
          {{.Options}}
         {{else}}
@@ -42,8 +42,8 @@ message {{.Name}}{
    {{if .Oneof}}
      oneof {{.Oneof.Name}} {
       {{range .Oneof.Fields}}
-        {{if ne .Comment ""}}
-        //{{.Comment}}
+        {{range .Comment}}
+        //{{.}}
         {{end}}
         {{if ne .Options ""}}
          {{.Options}}
