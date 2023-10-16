@@ -19,6 +19,23 @@ type messageLister struct {
 // VisitProto(p *Proto)
 func (l *messageLister) VisitMessage(m *proto.Message) {
 
+	fmt.Println("inline:", m.Name, *m)
+	if m == nil {
+		return
+	}
+	lister := &messageLister{
+		SandBox: l.SandBox,
+		currentMessage: &model.Message{
+			Name: m.Name,
+		},
+	}
+	if m.Comment != nil {
+		lister.currentMessage.Comment = m.Comment.Lines // strings.Join(message.Comment.Lines, "\n") // message.Comment.Message()
+	}
+	l.currentMessage.Messages = append(l.currentMessage.Messages, lister.currentMessage)
+	for _, each := range m.Elements {
+		each.Accept(lister)
+	}
 }
 func (l *messageLister) VisitService(v *proto.Service) {
 

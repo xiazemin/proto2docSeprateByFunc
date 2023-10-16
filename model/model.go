@@ -33,10 +33,11 @@ type Rpc struct {
 }
 
 type Message struct {
-	Name    string
-	Comment []string
-	Fields  []*Field
-	Oneof   *Oneof
+	Name     string
+	Comment  []string
+	Fields   []*Field
+	Oneof    *Oneof
+	Messages []*Message
 }
 
 type Field struct {

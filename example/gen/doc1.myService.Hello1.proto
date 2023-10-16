@@ -63,6 +63,7 @@ message Request{
       
       }
     
+    
 }
 
 
@@ -83,6 +84,7 @@ message SubMessage{
         
     
    
+    
 }
 
 
@@ -117,5 +119,48 @@ message Response{
            myService.sub.pkg.Response field5 = 3;
         
     
+    
+       
+           Inlinemsg field5 = 4;
+        
+    
    
+    
+      
+      message Inlinemsg{
+          
+          
+          // 嵌套消息
+          
+            
+                  string field1 = 1;
+              
+          
+          
+            
+                  int64 field2 = 2;
+              
+          
+        
+      }
+      
+}
+
+
+message Inlinemsg{
+    
+    
+    // 嵌套消息
+    
+       
+             string field1 = 1;
+        
+    
+    
+       
+             int64 field2 = 2;
+        
+    
+   
+    
 }

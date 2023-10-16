@@ -125,6 +125,7 @@ func (s *SandBox) handleMessage(m *proto.Message) {
 		// 	TopicContent: m.Name, //response
 		// 	ParentID:     refer,  //函数参数或者返回值
 		// })
+		fmt.Println("out:", m.Parent)
 		lister := &messageLister{
 			SandBox: s,
 			currentMessage: &model.Message{

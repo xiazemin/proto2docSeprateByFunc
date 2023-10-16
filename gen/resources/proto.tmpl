@@ -53,5 +53,36 @@ message {{.Name}}{
       {{end}}
       }
     {{end}}
+    {{range .Messages}}
+      {{range .Comment}}
+      //{{.}}
+      {{end}}
+      message {{.Name}}{
+          {{range .Fields}}
+          {{range .Comment}}
+          //{{.}}
+          {{end}}
+            {{if ne .Options ""}}
+              {{.Options}}
+              {{else}}
+                {{.Type}} {{.Name}} = {{.Number}} ;
+              {{end}}
+          {{end}}
+        {{if .Oneof}}
+          oneof {{.Oneof.Name}} {
+            {{range .Oneof.Fields}}
+              {{range .Comment}}
+              //{{.}}
+              {{end}}
+              {{if ne .Options ""}}
+              {{.Options}}
+              {{else}}
+                {{.Type}} {{.Name}} = {{.Number}} ;
+              {{end}}
+            {{end}}
+            }
+          {{end}}
+      }
+      {{end}}
 }
 {{end}}
