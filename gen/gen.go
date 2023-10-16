@@ -12,7 +12,7 @@ import (
 	parse "github.com/xiazemin/proto2docSeprateByFunc/parse"
 )
 
-func GenFiles(dst string, debug bool, files ...string) {
+func GenFiles(dst string, debug bool, files ...string) (genFiles []string) {
 	if len(files) < 1 {
 		fmt.Println("files empty")
 		return
@@ -62,7 +62,9 @@ func GenFiles(dst string, debug bool, files ...string) {
 				if e != nil {
 					fmt.Println(e)
 				}
-				ioutil.WriteFile(dst+strconv.FormatInt(int64(i), 10)+"."+srv.Name+"."+rpc.Name+".proto", b, 0777)
+				genFile := dst + strconv.FormatInt(int64(i), 10) + "." + srv.Name + "." + rpc.Name + ".proto"
+				ioutil.WriteFile(genFile, b, 0777)
+				genFiles = append(genFiles, genFile)
 			}
 		}
 	}
@@ -115,7 +117,7 @@ func GenFiles(dst string, debug bool, files ...string) {
 	// 	fmt.Println(err)
 	// }
 	// fmt.Println(resp)
-
+	return
 }
 
 func marshal(v interface{}) string {
