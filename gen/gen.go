@@ -62,7 +62,7 @@ func GenFiles(dst string, debug bool, files ...string) {
 				if e != nil {
 					fmt.Println(e)
 				}
-				ioutil.WriteFile(dst+strconv.FormatInt(int64(i), 10)+"."+srv.Name+"."+rpc.Name, b, 0777)
+				ioutil.WriteFile(dst+strconv.FormatInt(int64(i), 10)+"."+srv.Name+"."+rpc.Name+".proto", b, 0777)
 			}
 		}
 	}
